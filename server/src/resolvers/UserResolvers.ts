@@ -1,6 +1,6 @@
 import {Arg, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} from "type-graphql";
 import { User } from "../entity/User";
-import {hash} from "bcryptjs"
+import {hash} from "bcryptjs";
 
 
 
@@ -8,12 +8,12 @@ import {hash} from "bcryptjs"
 @Resolver()
 export class UserResolvers {
   // Query type with string return type 
-  @Query(()=> String)
-  hello(){
-    return "hi";
+  @Query(()=> [User])
+  users(){
+    return User.find();
   }
 
-  // Mutation type with boolean return type
+  // Mutation to Register user with boolean return type
   @Mutation(()=> Boolean)
   // register field
   async register(
@@ -31,5 +31,5 @@ export class UserResolvers {
     }
     return true;
   }
-}
 
+}
