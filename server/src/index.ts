@@ -5,7 +5,8 @@ import {User} from "./entity/User";
 
 import {ApolloServer, gql} from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { UserResolvers } from "./UserResolvers";
+import { UserResolvers } from "./resolvers/UserResolvers";
+import { MainResolvers, TrackResolver } from "./resolvers/TestResolvers";
 
 
 
@@ -22,7 +23,7 @@ import { UserResolvers } from "./UserResolvers";
     // build a apolloSercer schema and resolvers with 'type-graphql'
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolvers]
+            resolvers: [UserResolvers,MainResolvers, TrackResolver]
         })
     });
     // start apollo server for /graphql endpoint

@@ -1,5 +1,5 @@
-import {Arg, Mutation, Query, Resolver} from "type-graphql";
-import { User } from "./entity/User";
+import {Arg, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} from "type-graphql";
+import { User } from "../entity/User";
 import {hash} from "bcryptjs"
 
 
@@ -33,18 +33,3 @@ export class UserResolvers {
   }
 }
 
-
-// {
-//   typeDefs: gql`
-//     type Query {
-//       hello: String
-//     }
-//   `,
-//   resolvers: {
-//     Query: {
-//       hello: ()=> {
-//         return "Hello World";
-//       }
-//     }
-//   }
-// }
