@@ -7,6 +7,7 @@ import {ApolloServer, gql} from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolvers } from "./resolvers/UserResolvers";
 import { MainResolvers, TrackResolver } from "./resolvers/TestResolvers";
+import { MyContext } from "./types/MyContext";
 
 
 
@@ -24,13 +25,17 @@ import { MainResolvers, TrackResolver } from "./resolvers/TestResolvers";
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             resolvers: [UserResolvers,MainResolvers, TrackResolver]
-        })
+        }),
+        context: ({req,res}): MyContext => ({req,res}),
     });
-    // start apollo server for /graphql endpoint
+    //  start apollo server for /graphql endpoint
     await apolloServer.start();
 
     // attach apollo server to express app
-    apolloServer.applyMiddleware({app});
+    apolloServer.applyMiddleware({app, cors:{
+        origin: 'https://studio.apollographql.com',
+        credentials: true
+    }});
 
     // start express app
     app.listen(4000,()=>{

@@ -1,7 +1,8 @@
-import {Arg, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} from "type-graphql";
+import {Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} from "type-graphql";
 import { User } from "../entity/User";
 import {compare, hash} from "bcryptjs";
 import {sign} from "jsonwebtoken"
+import { MyContext } from "src/types/MyContext";
 
 
 
@@ -38,7 +39,8 @@ export class UserResolvers {
   @Mutation(()=> LoginResponse)
   async login(
     @Arg("email", ()=> String) email: string,
-    @Arg("password", ()=> String) password: string) :
+    @Arg("password", ()=> String) password: string,
+    @Ctx() {req, res}: MyContext) :
     Promise<LoginResponse> {
 
     const user = await User.findOne({ where: { email } });
@@ -51,9 +53,19 @@ export class UserResolvers {
       throw new Error("Invalid password");
     }
 
+    res.cookie(
+      'refresh-token',
+      sign({userId: user.id,}, 'my-secrate-ref', {
+        expiresIn: '7d',
+      }),
+      {
+        httpOnly: true,
+      }
+    );
+
     // login success
     return {
-      accessToken: sign({userId:user.id}, "my-secret", {
+      accessToken: sign({userId:user.id}, "my-secret-acc", {
         expiresIn: "15m",
       }),
     };
