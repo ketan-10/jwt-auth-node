@@ -1,3 +1,4 @@
+import "dotenv/config"
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import express from "express";
@@ -7,12 +8,14 @@ import {ApolloServer, gql} from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolvers } from "./resolvers/UserResolvers";
 import { MainResolvers, TrackResolver } from "./resolvers/TestResolvers";
-import { MyContext } from "./types/MyContext";
+import { MyContext } from "./types/Types";
 
 
 
 
 (async ()=> {
+
+    console.log(process.env.REFRESH_TOKEN_SECRET);
 
     // express routes 
     const app = express();

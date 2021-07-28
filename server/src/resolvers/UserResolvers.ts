@@ -1,8 +1,9 @@
-import {Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} from "type-graphql";
+import {Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware} from "type-graphql";
 import { User } from "../entity/User";
 import {compare, hash} from "bcryptjs";
 import {sign} from "jsonwebtoken"
-import { MyContext } from "src/types/MyContext";
+import { MyContext } from "src/types/Types";
+import { isAuth } from "../middlewares/isAuth";
 
 
 
@@ -10,8 +11,10 @@ import { MyContext } from "src/types/MyContext";
 @Resolver()
 export class UserResolvers {
   // Query type with string return type 
+  @UseMiddleware(isAuth)
   @Query(()=> [User])
-  users(){
+  users(@Ctx() context: MyContext){
+    console.log("From user: "+context.userId);
     return User.find();
   }
 
@@ -55,7 +58,7 @@ export class UserResolvers {
 
     res.cookie(
       'refresh-token',
-      sign({userId: user.id,}, 'my-secrate-ref', {
+      sign({userId: user.id,}, process.env.REFRESH_TOKEN_SECRET!, {
         expiresIn: '7d',
       }),
       {
@@ -65,7 +68,7 @@ export class UserResolvers {
 
     // login success
     return {
-      accessToken: sign({userId:user.id}, "my-secret-acc", {
+      accessToken: sign({userId:user.id}, process.env.ACCESS_TOKEN_SECRET!, {
         expiresIn: "15m",
       }),
     };
