@@ -4,6 +4,7 @@ import {compare, hash} from "bcryptjs";
 import {sign} from "jsonwebtoken"
 import { MyContext } from "src/types/Types";
 import { isAuth } from "../middlewares/isAuth";
+import { createAccessToken, createRefreshToken } from "src/helpers/generateTokens";
 
 
 
@@ -58,9 +59,7 @@ export class UserResolvers {
 
     res.cookie(
       'refresh-token',
-      sign({userId: user.id,}, process.env.REFRESH_TOKEN_SECRET!, {
-        expiresIn: '7d',
-      }),
+      createRefreshToken(user),
       {
         httpOnly: true,
       }
@@ -68,9 +67,7 @@ export class UserResolvers {
 
     // login success
     return {
-      accessToken: sign({userId:user.id}, process.env.ACCESS_TOKEN_SECRET!, {
-        expiresIn: "15m",
-      }),
+      accessToken: createAccessToken(user),
     };
   }
 
