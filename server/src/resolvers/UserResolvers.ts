@@ -1,10 +1,11 @@
-import {Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware} from "type-graphql";
+import {Arg, Ctx, Field, FieldResolver, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware} from "type-graphql";
 import { User } from "../entity/User";
 import {compare, hash} from "bcryptjs";
 import {sign} from "jsonwebtoken"
 import { MyContext } from "src/types/Types";
 import { isAuth } from "../middlewares/isAuth";
-import { createAccessToken, createRefreshToken } from "src/helpers/generateTokens";
+import { createAccessToken, createRefreshToken } from "../helpers/generateTokens";
+import { getConnection } from "typeorm";
 
 
 
@@ -38,6 +39,14 @@ export class UserResolvers {
     return true;
   }
 
+
+  // Revoke Refresh-Token
+  @UseMiddleware(isAuth)
+  @Mutation(()=> Boolean)
+  async revokeRefreshTokensForUser(@Arg("userId", ()=> Int) userId: number): Promise<boolean>{
+    await getConnection().getRepository(User).increment({id: userId}, 'tokenVersion', 1);
+    return true;
+  }
   
   // Mutation to login user with boolean return type
   @Mutation(()=> LoginResponse)

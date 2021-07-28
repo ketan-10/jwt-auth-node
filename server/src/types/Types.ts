@@ -10,3 +10,7 @@ export interface MyContext {
 export interface AccessTokenPayload extends JwtPayload {
   userId: number,
 } 
+
+export interface RefreshTokenPayload extends AccessTokenPayload{
+  tokenVersion?: number
+}
