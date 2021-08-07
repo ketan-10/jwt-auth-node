@@ -1,9 +1,11 @@
-# Start
+# Server
+
+## Start
 `yarn install`
 `yarn start`
 http://localhost:4000/graphql
 
-# Steps
+## Steps
 
 By Ben Awad :
 [JWT Authentication Node.js Tutorial with GraphQL and React](https://www.youtube.com/watch?v=25GS0MLT8JU)
@@ -37,4 +39,10 @@ https://stackoverflow.com/questions/19674456/run-postgresql-queries-from-the-com
 
 `yarn add -D @types/express @types/graphql`
 `yarn add -D nodemon`
+
+## Architecture
+
+Design Flow                |  User Flow
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/35309821/128605543-eb907e65-eec1-4fc7-a788-3d28f2175112.png)  |  ![](https://user-images.githubusercontent.com/35309821/128605428-280738fb-21a9-4a92-981f-c19764241fbf.png)
 
