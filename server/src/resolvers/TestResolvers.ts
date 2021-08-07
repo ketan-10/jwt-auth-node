@@ -6,6 +6,12 @@ import {Arg, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root} 
 
 
 @ObjectType()
+class NestedObject {
+  @Field()
+  value: number;
+}
+
+@ObjectType()
 class Track {
   @Field()
   id: string;
@@ -20,6 +26,9 @@ class Track {
     if(!this.id) return null;
     return `Auther For Id: ${this.id}`;
   }
+
+  @Field({nullable: true})
+  nestedObject?: NestedObject;
 }
 
 export class MainResolvers {
@@ -31,6 +40,9 @@ export class MainResolvers {
       },
       {
         id: "t2",
+        nestedObject:{
+          value: 2,
+        }
       },
     ];
   }

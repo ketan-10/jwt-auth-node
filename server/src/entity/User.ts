@@ -2,8 +2,8 @@ import { Field, Int, ObjectType } from "type-graphql";
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
 
 // Typeorm entity
-@Entity("users") // type-graphql
-@ObjectType()  // typeorm
+@Entity("users") // typeorm 
+@ObjectType()  // type-graphql
 export class User extends BaseEntity {
 
     @Field(() => Int)
