@@ -58,4 +58,4 @@ Design Flow                |  User Flow
 `yarn add -D @types/graphql`
 
 
-`yarn add -D @graphql-codegen/cli`
+`yarn add -D @graphql-codegen/cli` [graphql-codegen](https://www.youtube.com/watch?v=25GS0MLT8JU&t=5634s)

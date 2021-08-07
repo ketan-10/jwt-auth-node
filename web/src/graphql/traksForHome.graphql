@@ -1,0 +1,6 @@
+query MyTracks {
+  tracksForHome {
+    id
+    auther
+  }
+}
