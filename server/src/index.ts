@@ -12,7 +12,7 @@ import { MyContext, RefreshTokenPayload } from "./types/Types";
 import cookieParser from "cookie-parser";
 import { createAccessToken, createRefreshToken } from "./helpers/generateTokens";
 import { verify } from "jsonwebtoken";
-
+import cors from 'cors';
 
 
 
@@ -20,6 +20,11 @@ import { verify } from "jsonwebtoken";
 
     // express routes 
     const app = express();
+
+    app.use(cors({
+        origin: ["http://localhost:3000",'https://studio.apollographql.com'], // "*"
+        credentials: true,
+    }))
     app.use(cookieParser())
     app.get('/', (_,res) => res.send("<h1>Hello</h1>"))
 
@@ -80,11 +85,13 @@ import { verify } from "jsonwebtoken";
     //  start apollo server for /graphql endpoint
     await apolloServer.start();
 
-    // attach apollo server to express app
-    apolloServer.applyMiddleware({app, cors:{
-        origin: 'https://studio.apollographql.com',
-        credentials: true
-    }});
+    // attach apollo server to express app 
+    apolloServer.applyMiddleware({app, 
+    //   cors:{
+    //     origin: 'https://studio.apollographql.com',
+    //     credentials: true
+    //   }
+    });
 
     // start express app
     app.listen(4000,()=>{

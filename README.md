@@ -46,3 +46,16 @@ Design Flow                |  User Flow
 :-------------------------:|:-------------------------:
 ![](https://user-images.githubusercontent.com/35309821/128605543-eb907e65-eec1-4fc7-a788-3d28f2175112.png)  |  ![](https://user-images.githubusercontent.com/35309821/128605428-280738fb-21a9-4a92-981f-c19764241fbf.png)
 
+
+# Web 
+
+## Steps
+
+`npx create-react-app web --template typescript`
+`yarn start`
+
+`yarn add @apollo/client graphql`
+`yarn add -D @types/graphql`
+
+
+`yarn add -D @graphql-codegen/cli`
