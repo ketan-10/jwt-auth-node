@@ -1,15 +1,22 @@
 import React from 'react';
 import { MyForm } from '../components/MyForm';
-
-// Formic by Ben Awad "https://www.youtube.com/watch?v=FD50LPJ6bjE" 
-
+import {useRegisterUserMutation} from '../generated/graphql';
 
 export const Register : React.FC = () => {
+
+  const [registerUser, {data,loading,error}] = useRegisterUserMutation();
   return (
     <>
       <MyForm onSubmit={
-        (data)=>{
-          console.log(data);
+        async (data, {setSubmitting})=>{
+          setSubmitting(true);
+          await registerUser({
+            variables:{
+              registerEmail: data.myUserName,
+              registerPassword: data.myPassword,
+            }
+          });
+          setSubmitting(false);
         }
       }/>
     </>

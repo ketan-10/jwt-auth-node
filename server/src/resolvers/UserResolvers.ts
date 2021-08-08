@@ -28,10 +28,11 @@ export class UserResolvers {
     @Arg("password", ()=> String) password: string){
     try{
       // insert into db
-      await User.insert({
+      const insertedUser = await User.insert({
         email,
         password: await hash(password,12),
-      })
+      });
+      console.log(insertedUser);
     } catch(e){
       console.log(e);
       return false;

@@ -7,7 +7,7 @@ import {useMyTracksQuery} from "./generated/graphql";
 function TestCodeGen() {
   
   // old-way
-  const {data, loading, error} = useQuery(gql`
+  const {data, loading} = useQuery(gql`
     query Query {
       tracksForHome {
         id
@@ -19,7 +19,7 @@ function TestCodeGen() {
 // using code-gen
   const {data: mydata, loading: myLoading} = useMyTracksQuery()
   if(loading || myLoading) return <div>Loading...</div> 
-
+  
   return (
     <>
       <div>{JSON.stringify(data)}</div>

@@ -1,9 +1,14 @@
 import React from 'react';
+import { MyForm } from '../components/MyForm';
 
 export const Login : React.FC = () => {
   return (
-    <div>
-      Login
-    </div>
+    <>
+      <MyForm onSubmit={
+        (data)=>{
+          console.log(data);
+        }
+      }/>
+    </>
   );
 }
