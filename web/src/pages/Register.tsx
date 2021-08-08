@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { MyForm } from '../components/MyForm';
 import {useRegisterUserMutation} from '../generated/graphql';
 
 export const Register : React.FC = () => {
 
   const [registerUser] = useRegisterUserMutation();
+  const history = useHistory();
   return (
     <>
       <MyForm onSubmit={
@@ -17,6 +19,7 @@ export const Register : React.FC = () => {
             }
           });
           setSubmitting(false);
+          history.push("/login");
         }
       }/>
     </>

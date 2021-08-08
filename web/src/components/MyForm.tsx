@@ -38,7 +38,7 @@ export const MyForm : React.FC<Props> = ({onSubmit}) => {
               <Field type="input" name="myPassword" required/>
             </div>
             <div>
-              <button type="submit">Register</button>
+              <button type="submit">Submit</button>
             </div>
             <p>{JSON.stringify(errors)}</p>
           </Form>
