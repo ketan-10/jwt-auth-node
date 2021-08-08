@@ -4,7 +4,7 @@ import {useRegisterUserMutation} from '../generated/graphql';
 
 export const Register : React.FC = () => {
 
-  const [registerUser, {data,loading,error}] = useRegisterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
   return (
     <>
       <MyForm onSubmit={

@@ -24,7 +24,7 @@ import cors from 'cors';
     app.use(cors({
         origin: ["http://localhost:3000",'https://studio.apollographql.com'], // "*"
         credentials: true,
-    }))
+    }));
     app.use(cookieParser())
     app.get('/', (_,res) => res.send("<h1>Hello</h1>"))
 
@@ -91,6 +91,7 @@ import cors from 'cors';
     //     origin: 'https://studio.apollographql.com',
     //     credentials: true
     //   }
+    cors: false,
     });
 
     // start express app

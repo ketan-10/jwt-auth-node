@@ -69,6 +69,19 @@ export type User = {
   tokenVersion: Scalars['Int'];
 };
 
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: number, email: string, tokenVersion: number }> };
+
+export type LoginUserMutationVariables = Exact<{
+  loginPassword: Scalars['String'];
+  loginEmail: Scalars['String'];
+}>;
+
+
+export type LoginUserMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
+
 export type RegisterUserMutationVariables = Exact<{
   registerPassword: Scalars['String'];
   registerEmail: Scalars['String'];
@@ -83,6 +96,76 @@ export type MyTracksQueryVariables = Exact<{ [key: string]: never; }>;
 export type MyTracksQuery = { __typename?: 'Query', tracksForHome: Array<{ __typename?: 'Track', id: string, auther?: Maybe<string> }> };
 
 
+export const GetAllUsersDocument = gql`
+    query GetAllUsers {
+  users {
+    id
+    email
+    tokenVersion
+  }
+}
+    `;
+
+/**
+ * __useGetAllUsersQuery__
+ *
+ * To run a query within a React component, call `useGetAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+      }
+export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+        }
+export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
+export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
+export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAllUsersQueryVariables>;
+export const LoginUserDocument = gql`
+    mutation LoginUser($loginPassword: String!, $loginEmail: String!) {
+  login(password: $loginPassword, email: $loginEmail) {
+    accessToken
+  }
+}
+    `;
+export type LoginUserMutationFn = Apollo.MutationFunction<LoginUserMutation, LoginUserMutationVariables>;
+
+/**
+ * __useLoginUserMutation__
+ *
+ * To run a mutation, you first call `useLoginUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginUserMutation, { data, loading, error }] = useLoginUserMutation({
+ *   variables: {
+ *      loginPassword: // value for 'loginPassword'
+ *      loginEmail: // value for 'loginEmail'
+ *   },
+ * });
+ */
+export function useLoginUserMutation(baseOptions?: Apollo.MutationHookOptions<LoginUserMutation, LoginUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginUserMutation, LoginUserMutationVariables>(LoginUserDocument, options);
+      }
+export type LoginUserMutationHookResult = ReturnType<typeof useLoginUserMutation>;
+export type LoginUserMutationResult = Apollo.MutationResult<LoginUserMutation>;
+export type LoginUserMutationOptions = Apollo.BaseMutationOptions<LoginUserMutation, LoginUserMutationVariables>;
 export const RegisterUserDocument = gql`
     mutation RegisterUser($registerPassword: String!, $registerEmail: String!) {
   register(password: $registerPassword, email: $registerEmail)
