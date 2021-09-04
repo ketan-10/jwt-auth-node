@@ -9,6 +9,7 @@ http://localhost:4000/graphql
 
 By Ben Awad :
 [JWT Authentication Node.js Tutorial with GraphQL and React](https://www.youtube.com/watch?v=25GS0MLT8JU)
+[GraphQL N+1 Problem](https://www.youtube.com/watch?v=uCbFMZYQbxE)
 
 #### Used Typeorm to init a project
 `typeorm init --name server --database postgres`
