@@ -10,6 +10,11 @@ http://localhost:4000/graphql
 By Ben Awad :
 [JWT Authentication Node.js Tutorial with GraphQL and React](https://www.youtube.com/watch?v=25GS0MLT8JU)
 
+- JWT, Oauth and cross-site-scripting(XSS) and cross-site-resource-forgery (CSRF): <br>
+  - [My Notes](https://github.com/ketan-10/Testing/blob/master/WebSecurity.txt) 
+  - [How to Store JWT for Authentication](https://youtu.be/iD49_NIQ-R4)
+  - [Why LocalStorage is Vulnerable to XSS (and cookies are too)](https://youtu.be/M6N7gEZ-IUQ)
+
 [GraphQL N+1 Problem](https://www.youtube.com/watch?v=uCbFMZYQbxE)
 
 #### Used Typeorm to init a project
